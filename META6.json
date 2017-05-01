@@ -1,25 +1,22 @@
 {
     "perl"        : "6",
-    "name"        : "MyFuncs",
+    "name"        : "Foo::Bar",
     "version"     : "*",
-    "description" : "Provides misclemllaneous functions and programs",
+    "description" : "Provides miscellaneous functions and programs",
     "authors"     : [ "github:tbrowder" ],
-    "license"     : "Artistic 2.0",
-    "source-url"  : "https://github.com/tbrowder/PERL6LIB/",
+    "license"     : "Artistic-2.0",
+    "source-url"  : "https://github.com/tbrowder/Foo-Bar-PERL6/",
     "support"     : {
-        "bugtracker" : "https://github.com/tbrowder/PERL6LIB/issues",
-        "source"     : "https://github.com/tbrowder/PERL6LIB/"
+        "bugtracker" : "https://github.com/tbrowder/Foo-Bar-PERL6/issues",
+        "source"     : "https://github.com/tbrowder/Foo-Bar-PERL6/"
     },
     "provides"    : {
-        "MyFuncs" : "lib/MyFuncs.pm6"
+        "Foo::Bar" : "lib/Foo/Bar.pm6"
     },
     "test-depends"     : [
-	"Test::META",
-	"File::Temp",
-	"File::Compare"
+	"Test::META"
     ],
     "depends" : [
-	"Proc::More"
     ],
     "resources" : [
     ],
