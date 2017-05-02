@@ -1,6 +1,7 @@
 #!/usr/bin/env perl6
 
-use JSON::Fast;
+#use JSON::Fast;
+use META6;
 
 use GFUNCS :ALL;
 
@@ -20,12 +21,16 @@ my $author  = $gituser;
 
 my $jfil = './META6.json';
 my $istr = slurp $jfil;
-my @arr = from-json $istr;
-#say $ijs;
 
+my $m = META6.new :file($jfil);
+
+=begin pod
+my @arr = from-json $istr;
+say $ijs;
 for @arr -> $o {
     say $o;
 }
+=end pod
 
 exit;
 
