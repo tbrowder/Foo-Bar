@@ -177,20 +177,27 @@ sub read-meta-in {
         my $nw = +@w;
         if !$nw {
             say "WARNING: Attribute '$attr' has no value.";
+            if %ma{$attr}:exists {
+                if %ma{$attr} {
+                } 
+            }
+            else {
+                say "  :
         }
         given $attr {
             when 'name' {
-                # S-12 mandatory
+                # S22 mandatory
             }
             when 'description' {
-                # S-12 mandatory
+                # S22 mandatory
             }
-            when 'name' {
-                # mandatory
+            when 'perl' {
+                # S22 mandatory
             }
-            when 'name' {
-                # mandatory
+            when 'version' {
+                # S22 mandatory
             }
+
             when 'name' {
                 # mandatory
             }
