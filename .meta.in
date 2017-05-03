@@ -1,10 +1,15 @@
 # for each repo define one or more of the following
-# attributes:
-gitauthor
-name # module name
-gitrepo 
+# attributes which will be placed in or be part of
+# the META6.json file:
+gitauthor tbrowder # if entered, overrides env var GITHUB_USER 
+name # module name, mandatory
+gitrepo # github repo name, mandatory 
 
-provides # module or bin name, path to the object
-o
+provides # module or bin name, path to the object; for the named module it is not mandatory, but other objects must have an entry 
+version # initial version, default: '0.0.0', ignored over higher versions in the META6.json file
+depends 
+test-depends # default:  Test::META
+buil-depends
+tags # mandatory
  
 
