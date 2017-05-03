@@ -3,6 +3,8 @@
 #use JSON::Fast;
 use META6;
 
+use Proc::More :run-command;
+
 use GFUNCS :ALL;
 
 =begin pod
@@ -147,3 +149,24 @@ sub help {
     exit;
 } # help
 =end pod
+
+sub read-meta-in {
+    # read the default data for a repo
+    # must be in a repo dir
+    die "FATAL: Must be in a repo dir with a .git sub-dir" if !".git".IO.d;
+
+    my $f = '.meta.in';
+    if !$f.f {
+        say "WARNING: No file '$f' exists in this repo.";
+        return;
+    }
+
+    my %h;
+    for $f.IO.lines -> $line is copy {
+        $line = strip-comment $line;
+        next if !~~ /\S/;
+        for $line.words {
+        }
+    }
+}
+

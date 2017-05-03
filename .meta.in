@@ -1,0 +1,10 @@
+# for each repo define one or more of the following
+# attributes:
+gitauthor
+name # module name
+gitrepo 
+
+provides # module or bin name, path to the object
+o
+ 
+
