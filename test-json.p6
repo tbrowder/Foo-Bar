@@ -155,6 +155,13 @@ sub read-meta-in {
     # must be in a repo dir
     die "FATAL: Must be in a repo dir with a .git sub-dir" if !".git".IO.d;
 
+    # S-12 mandatory attributes
+    my %ma = [ 
+               name => '', 
+               description => '',
+             ];
+
+
     my $f = '.meta.in';
     if !$f.f {
         say "WARNING: No file '$f' exists in this repo.";
@@ -165,7 +172,35 @@ sub read-meta-in {
     for $f.IO.lines -> $line is copy {
         $line = strip-comment $line;
         next if !~~ /\S/;
-        for $line.words {
+        my @w = $line.words;
+        my $attr = shift @w;
+        my $nw = +@w;
+        if !$nw {
+            say "WARNING: Attribute '$attr' has no value.";
+        }
+        given $attr {
+            when 'name' {
+                # S-12 mandatory
+            }
+            when 'description' {
+                # S-12 mandatory
+            }
+            when 'name' {
+                # mandatory
+            }
+            when 'name' {
+                # mandatory
+            }
+            when 'name' {
+                # mandatory
+            }
+            when 'name' {
+                # mandatory
+            }
+            when 'name' {
+                # mandatory
+            }
+            default { die "FATAL: Unknwown attribute '$attr' in file '$f'."; }
         }
     }
 }

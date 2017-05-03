@@ -1,15 +1,32 @@
-# for each repo define one or more of the following
+# For each repo define one or more of the following
 # attributes which will be placed in or be part of
-# the META6.json file:
-gitauthor tbrowder # if entered, overrides env var GITHUB_USER 
-name # module name, mandatory
-gitrepo # github repo name, mandatory 
+# the META6.json file. Each attribute tag is followed by one or more
+# entries, space-separated.
 
-provides # module or bin name, path to the object; for the named module it is not mandatory, but other objects must have an entry 
+#=== S-12 mandatory attributes =============
+name Foo::Bar         # module name, mandatory
+description Miscellanous stuff for practicing module development # mandatory
+
+#=== other mandatory attributes =============
+gitrepo Foo-Bar-Perl6 # github repo name (without .git extension), mandatory 
+
+
+gitauthor tbrowder    # if entered, overrides env var GITHUB_USER 
+
+# The provides tag may be entered multiple times.
+# Each entry is followed by two entries: module or bin name, and the local path 
+# to the object. For the named module it is not mandatory, but other objects must have an entry.
+provides
+
 version # initial version, default: '0.0.0', ignored over higher versions in the META6.json file
 depends 
 test-depends # default:  Test::META
-buil-depends
-tags # mandatory
+build-depends
+tags # not mandatory yet, but desired by the ecosystem
+auth # default github:tbrowder
+
+# The authors tag may be entered multiple times.
+authors Tom Browder <tom.browder@gmail.com> 
+
  
 
