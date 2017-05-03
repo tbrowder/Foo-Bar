@@ -1,26 +1,37 @@
 {
-    "perl"        : "6",
-    "name"        : "Foo::Bar",
-    "version"     : "*",
-    "description" : "Provides miscellaneous functions and programs",
-    "authors"     : [ "github:tbrowder" ],
-    "license"     : "Artistic-2.0",
-    "source-url"  : "https://github.com/tbrowder/Foo-Bar-PERL6/",
-    "support"     : {
-        "bugtracker" : "https://github.com/tbrowder/Foo-Bar-PERL6/issues",
-        "source"     : "https://github.com/tbrowder/Foo-Bar-PERL6/"
-    },
-    "provides"    : {
-        "Foo::Bar" : "lib/Foo/Bar.pm6"
-    },
-    "test-depends"     : [
-	"Test::META"
-    ],
-    "depends" : [
-    ],
-    "resources" : [
-    ],
-    "tags" : [
-	"functions"
-    ]
+  "name": "Foo::Bar",
+  "source-url": "https://github.com/tbrowder/Foo-Bar-Perl6/",
+  "support": {
+    "source": "https://github.com/tbrowder/Foo-Bar-Perl6/",
+    "bugtracker": "https://github.com/tbrowder/Foo-Bar-Perl6/issues"
+  },
+  "perl": "6",
+  "resources": [
+    
+  ],
+  "build-depends": [
+    
+  ],
+  "auth": null,
+  "depends": [
+    
+  ],
+  "tags": [
+    "vars",
+    "functions"
+  ],
+  "license": "Artistic-2.0",
+  "test-depends": [
+    "Test::META"
+  ],
+  "provides": {
+    "Foo::Bar": "lib/Foo/Bar.pm6",
+    "Bar::Foo": "lib/Bar/Foo.pm6"
+  },
+  "version": "4.4.4",
+  "authors": [
+    "github:tbrowder"
+  ],
+  "description": "Provides miscellaneous functions and programs",
+  "meta6": "0"
 }

@@ -22,7 +22,32 @@ my $author  = $gituser;
 my $jfil = './META6.json';
 my $istr = slurp $jfil;
 
+# NOTE: entries in tha meta file must be recognized by the specs
+
+# get the current meta
 my $m = META6.new :file($jfil);
+# mod an existing entry
+$m<version> = '4.4.4';
+
+# add a new value to an array
+$m<tags>.append: "vars";
+
+# change value of an array
+$m<tags> = <vars>;
+
+# change values of an array
+$m<tags> = <vars functions>;
+
+# add a new hash value
+$m<provides><Bar::Foo> = "lib/Bar/Foo.pm6";
+
+# add a new hash value
+$m<support><bugtracker> = "https://github.com/tbrowder/Foo-Bar-Perl6/issues";
+
+
+# write the modified meta out again
+spurt $jfil, $m.to-json;
+
 
 =begin pod
 my @arr = from-json $istr;
