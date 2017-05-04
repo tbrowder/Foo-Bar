@@ -41,6 +41,11 @@ our %os is export = [
            production => '', 
          ];
 
-sub isa-meta-section($sect) is export {
-    return %os{$sect}:exists or %ms{$sect}:exists or %ss{$sect}:exists or %us{$sect}:exists;
+sub isa-meta-section($sect --> Bool) is export {
+    if %os{$sect}:exists or %ms{$sect}:exists or %ss{$sect}:exists or %us{$sect}:exists {
+        return True;
+    }
+    else {
+        return False;
+    }
 }

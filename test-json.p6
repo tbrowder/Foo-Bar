@@ -1,5 +1,4 @@
-#!/usr/bin/env perl6
-
+#!/usr/bin/env perl6 
 use META6;
 
 use Proc::More :run-command;
@@ -24,6 +23,7 @@ my $m = META6.new :file($jfil);
 my $mode = 'init';
 if $mode eq 'init' {
     read-meta-in $m;
+    spurt $jfil, $m.to-json;
 }
 
 =begin pod
@@ -69,8 +69,18 @@ sub read-meta-in(META6 $m) {
     }
 
     # do we have the mandatory sections?
-    die "fix this";
+    check-mandatory-sections;
+
 } # read-meta-in
+
+sub check-mandatory-sections {
+    for %ms.kv -> $k, $v {
+        say "Missing value for S22 mandatory section '$k'." if !$v;
+    }
+    for %us.kv -> $k, $v {
+        say "Missing value for user mandatory section '$k'." if !$v;
+    }
+}
 
 sub handle-section($section, @words, META6 $m) {
     my $nw = +@words;
@@ -87,15 +97,15 @@ sub handle-section($section, @words, META6 $m) {
         when 'version' {
             # S22 mandatory
         }
-        when 'name' {
+        when 'gitrepo' {
             # mandatory
         }
-        when 'name' {
+        when 'gitauthor' {
             # mandatory
         }
-        when 'name' {
+        when 'authors' {
             # mandatory
         }
         default { die "FATAL: Unhandled section '$section' in file '$mfil'."; }
-        }
+    }
 } # handle-section
