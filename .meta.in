@@ -28,4 +28,6 @@ auth # default github:tbrowder
 # The authors tag may be entered multiple times.
 authors Tom Browder <tom.browder@gmail.com> 
 
+license # default Artistic-2.0
+
  

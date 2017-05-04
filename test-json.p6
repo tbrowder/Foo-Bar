@@ -59,10 +59,8 @@ sub read-meta-in(META6 $m) {
         next if $line !~~ /\S/;
         my @w = $line.words;
         my $sect = shift @w;
-        my $nw = +@w;
-        if !$nw {
-            say "WARNING: Section '$sect' is unknown." if !isa-meta-section($sect);
-            say "WARNING: Section '$sect' has no value...skipping";
+        if !isa-meta-section($sect) {
+            say "WARNING: Section '$sect' is unknown.";
             next;
         }
         handle-section($sect, @w, $m);
@@ -82,30 +80,100 @@ sub check-mandatory-sections {
     }
 }
 
-sub handle-section($section, @words, META6 $m) {
+sub handle-section($section, @words is copy, META6 $m) {
     my $nw = +@words;
+
+=begin pod
+    if !$nw {
+        say "WARNING: Section '$sect' is unknown." if !isa-meta-section($sect);
+        say "WARNING: Section '$sect' has no value.";
+        next if not %ms{$sect}:exists and not %ms{$sect}:exists;
+    }
+=end pod
+
     given $section {
         when 'name' {
             # S22 mandatory
+            die "FATAL: Too many words ($nw) for section '$section'." if $nw > 1;
+            my $word = shift @words;
+            $m{$section}  = $word;
+            %ms{$section} = $word;
         }
         when 'description' {
             # S22 mandatory
+            die "FATAL: Too few words ($nw) for section '$section'." if $nw < 1;
+            my $word = join ' ', @words;
+            $m{$section}  = $word;
+            %ms{$section} = $word;
         }
         when 'perl' {
             # S22 mandatory
+            die "FATAL: Too many words ($nw) for section '$section'." if $nw > 1;
+            my $word;
+            if $nw {
+                $word = shift @words;
+            }
+            else {
+                $word = '6'; # default
+            }
+            $m{$section}  = $word;
+            %ms{$section} = $word;
         }
         when 'version' {
             # S22 mandatory
+            die "FATAL: Too many words ($nw) for section '$section'." if $nw > 1;
+            my $word;
+            if $nw {
+                $word = shift @words;
+            }
+            else {
+                $word = '0.0.0'; # default
+            }
+            $m{$section}  = $word;
+            %ms{$section} = $word;
+        }
+        when 'license' {
+            die "FATAL: Too many words ($nw) for section '$section'." if $nw > 1;
+            my $word;
+            if $nw {
+                $word = shift @words;
+            }
+            else {
+                $word = 'Artistic-2.0'; # default
+            }
+            $m{$section}  = $word;
+            %ms{$section} = $word;
         }
         when 'gitrepo' {
             # mandatory
+            die "FATAL: Too many words ($nw) for section '$section'." if $nw > 1;
+            die "FATAL: Too few words ($nw) for section '$section'." if $nw < 1;
         }
         when 'gitauthor' {
             # mandatory
+            die "FATAL: Too many words ($nw) for section '$section'." if $nw > 1;
+            die "FATAL: Too few words ($nw) for section '$section'." if $nw < 1;
         }
         when 'authors' {
             # mandatory
+            my $word = join ' ', @words;
+            $m{$section}  = $word;
+            %ms{$section}.append: $word;
         }
+        when 'provides' {
+        }
+        when 'test-depends' {
+        }
+        when 'build-depends' {
+        }
+        when 'depends' {
+        }
+        when 'tags' {
+        }
+        when 'auth' {
+        }
+
+
         default { die "FATAL: Unhandled section '$section' in file '$mfil'."; }
     }
 } # handle-section

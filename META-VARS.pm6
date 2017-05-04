@@ -26,6 +26,7 @@ our %ss is export = [
 our %os is export = [ 
            meta6 => '', 
            authors => '', 
+           auth => '', 
            provides => '', 
            depends => '', 
            emulates => '', 

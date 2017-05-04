@@ -1,12 +1,10 @@
 {
-  "name": null,
+  "name": "Foo::Bar",
   "source-url": null,
   "support": {
     "source": null
   },
-  "perl": {
-    "0": null
-  },
+  "perl": "6",
   "resources": [
     
   ],
@@ -20,19 +18,15 @@
   "tags": [
     
   ],
-  "license": null,
+  "license": "Artistic-2.0",
   "test-depends": [
     
   ],
   "provides": {
     
   },
-  "version": {
-    "0": null
-  },
-  "authors": [
-    
-  ],
-  "description": null,
+  "version": "0.0.0",
+  "authors": "Tom Browder <tom.browder@gmail.com>",
+  "description": "Miscellanous stuff for practicing module development",
   "meta6": "0"
 }
