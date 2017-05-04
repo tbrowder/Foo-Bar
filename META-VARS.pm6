@@ -1,15 +1,19 @@
 unit module META-VARS;
 
-# S22 mandatory attributes
-our %ma is export = [ 
+# S22 mandatory sections
+our %ms is export = [ 
            name => '', 
            description => '',
            perl => '',
            version => '',
          ];
-# my mandatory attributes
-# support attributes
-our %sa is export = [ 
+# my mandatory sections
+our %us is export = [ 
+           gitrepo => '', 
+           gitauthor => '', 
+         ];
+# support sections
+our %ss is export = [ 
            email => '', 
            license => '', # URL 
            mailinglist => '', 
@@ -18,8 +22,8 @@ our %sa is export = [
            irc => '', 
            phone => '', 
          ];
-# other attributes
-our %oa is export = [ 
+# other sections
+our %os is export = [ 
            meta6 => '', 
            authors => '', 
            provides => '', 
@@ -38,5 +42,5 @@ our %oa is export = [
          ];
 
 sub isa-meta-section($sect) is export {
-    return %oa{$sect}:exists or %ma{$sect}:exists or %sa{$sect}:exists;
+    return %os{$sect}:exists or %ms{$sect}:exists or %ss{$sect}:exists or %us{$sect}:exists;
 }

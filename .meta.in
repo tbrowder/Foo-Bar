@@ -1,24 +1,24 @@
 # For each repo define one or more of the following
-# attributes which will be placed in or be part of
-# the META6.json file. Each attribute tag is followed by one or more
+# sections which will be placed in or be part of
+# the META6.json file. Each section tag is followed by one or more
 # entries, space-separated.
 
-#=== S-12 mandatory attributes =============
+#=== S22 mandatory sections =============
 name Foo::Bar         # module name, mandatory
 description Miscellanous stuff for practicing module development # mandatory
+version # initial version, default: '0.0.0', ignored over higher versions in the META6.json file
+perl # default 6
 
-#=== other mandatory attributes =============
+#=== my mandatory sections =============
 gitrepo Foo-Bar-Perl6 # github repo name (without .git extension), mandatory 
-
-
 gitauthor tbrowder    # if entered, overrides env var GITHUB_USER 
 
+#=== S22 optional sections =============
 # The provides tag may be entered multiple times.
 # Each entry is followed by two entries: module or bin name, and the local path 
 # to the object. For the named module it is not mandatory, but other objects must have an entry.
 provides
 
-version # initial version, default: '0.0.0', ignored over higher versions in the META6.json file
 depends 
 test-depends # default:  Test::META
 build-depends
@@ -29,4 +29,3 @@ auth # default github:tbrowder
 authors Tom Browder <tom.browder@gmail.com> 
 
  
-

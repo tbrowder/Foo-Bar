@@ -184,29 +184,29 @@ sub read-meta-in(META6 $m) {
 }
 
 sub handle-section($section, @words, META6 $m) {
-        given $section {
-            when 'name' {
-                # S22 mandatory
-            }
-            when 'description' {
-                # S22 mandatory
-            }
-            when 'perl' {
-                # S22 mandatory
-            }
-            when 'version' {
-                # S22 mandatory
-            }
-
-            when 'name' {
-                # mandatory
-            }
-            when 'name' {
-                # mandatory
-            }
-            when 'name' {
-                # mandatory
-            }
-            default { die "FATAL: Unhandled section '$section' in file '$mfil'."; }
+    my $nw = +@words;
+    given $section {
+        when 'name' {
+            # S22 mandatory
+        }
+        when 'description' {
+            # S22 mandatory
+        }
+        when 'perl' {
+            # S22 mandatory
+        }
+        when 'version' {
+            # S22 mandatory
+        }
+        when 'name' {
+            # mandatory
+        }
+        when 'name' {
+            # mandatory
+        }
+        when 'name' {
+            # mandatory
+        }
+        default { die "FATAL: Unhandled section '$section' in file '$mfil'."; }
         }
 } # handle-section
