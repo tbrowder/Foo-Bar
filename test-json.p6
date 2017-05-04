@@ -4,8 +4,12 @@
 use META6;
 
 use Proc::More :run-command;
+use Text::More :strip-comment;
 
 use GFUNCS :ALL;
+
+use lib <.>;
+use META-VARS;
 
 =begin pod
 my $usage = "Usage: $*PROGRAM mode [options...]\nNOTE: The program MUST be executed at the top of the repo dir.";
@@ -22,9 +26,10 @@ my $gituser = %*ENV<GITHUB_USER>;
 my $author  = $gituser;
 
 my $jfil = './META6.json';
+my $mfil = './.meta.in';
 my $istr = slurp $jfil;
 
-# NOTE: entries in tha meta file must be recognized by the specs
+# NOTE: entries in the meta file must be recognized by the specs
 
 # get the current meta
 my $m = META6.new :file($jfil);
@@ -150,41 +155,36 @@ sub help {
 } # help
 =end pod
 
-sub read-meta-in {
+sub read-meta-in(META6 $m) {
     # read the default data for a repo
     # must be in a repo dir
     die "FATAL: Must be in a repo dir with a .git sub-dir" if !".git".IO.d;
 
-    # S-12 mandatory attributes
-    my %ma = [ 
-               name => '', 
-               description => '',
-             ];
-
-
-    my $f = '.meta.in';
-    if !$f.f {
-        say "WARNING: No file '$f' exists in this repo.";
+    if !$mfil.f {
+        say "WARNING: No file '$mfil' exists in this repo.";
         return;
     }
 
-    my %h;
-    for $f.IO.lines -> $line is copy {
+    for $mfil.IO.lines -> $line is copy {
         $line = strip-comment $line;
-        next if !~~ /\S/;
+        next if $line !~~ /\S/;
         my @w = $line.words;
-        my $attr = shift @w;
+        my $sect = shift @w;
         my $nw = +@w;
         if !$nw {
-            say "WARNING: Attribute '$attr' has no value.";
-            if %ma{$attr}:exists {
-                if %ma{$attr} {
-                } 
-            }
-            else {
-                say "  :
+            say "WARNING: Section '$sect' is unknown." if !isa-meta-section($sect);
+            say "WARNING: Section '$sect' has no value...skipping";
+            next;
         }
-        given $attr {
+        handle-section($sect, @w, $m);
+    }
+
+    # do we have the mandatory sections?
+    die "fix this";
+}
+
+sub handle-section($section, @words, META6 $m) {
+        given $section {
             when 'name' {
                 # S22 mandatory
             }
@@ -207,8 +207,6 @@ sub read-meta-in {
             when 'name' {
                 # mandatory
             }
-            default { die "FATAL: Unknwown attribute '$attr' in file '$f'."; }
+            default { die "FATAL: Unhandled section '$section' in file '$mfil'."; }
         }
-    }
-}
-
+} # handle-section
