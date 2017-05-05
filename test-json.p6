@@ -22,6 +22,7 @@ my $m = META6.new :file($jfil);
 # if in mode init, read the .meta.in file
 my $mode = 'init';
 if $mode eq 'init' {
+    #init-sections $m;
     read-meta-in $m;
     spurt $jfil, $m.to-json;
 }
@@ -163,6 +164,15 @@ sub handle-section($section, @words is copy, META6 $m) {
         when 'provides' {
         }
         when 'test-depends' {
+            my $word;
+            if $nw {
+                $word = shift @words;
+            }
+            else {
+                $word = 'Test::Meta'; # default
+            }
+            $m{$section}  = $word;
+            %ms{$section}.append: $word;
         }
         when 'build-depends' {
         }
@@ -177,3 +187,16 @@ sub handle-section($section, @words is copy, META6 $m) {
         default { die "FATAL: Unhandled section '$section' in file '$mfil'."; }
     }
 } # handle-section
+
+sub init-sections(META6 $m) {
+    if not $<source-url> {
+        $m<source-url> = '';
+    }
+    if not $<support><source> {
+        $m<support><source> = '';
+    }
+    if not $<tags> {
+        $m<tags> = [];
+    }
+}
+

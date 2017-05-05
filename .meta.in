@@ -19,15 +19,21 @@ gitauthor tbrowder    # if entered, overrides env var GITHUB_USER
 # to the object. For the named module it is not mandatory, but other objects must have an entry.
 provides
 
+# single-value sections
+auth github:tbrowder # if entered, overrides env var PERL6_META6_AUTH 
+license # default Artistic-2.0
+
+#=== LISTS ====
+# list sections (multi-valued)
 depends 
 test-depends # default:  Test::META
 build-depends
 tags # not mandatory yet, but desired by the ecosystem
-auth # default github:tbrowder
 
 # The authors tag may be entered multiple times.
 authors Tom Browder <tom.browder@gmail.com> 
 
-license # default Artistic-2.0
+#=== HASHES ====
+
 
  
