@@ -16,8 +16,8 @@ gitauthor tbrowder    # if entered, overrides env var GITHUB_USER
 #=== S22 optional sections =============
 # The provides tag may be entered multiple times.
 # Each entry is followed by two entries: module or bin name, and the local path 
-# to the object. For the named module it is not mandatory, but other objects must have an entry.
-provides
+# to the object.
+provides Foo::Bar lib/Foo/Bar.pm6
 
 # single-value sections
 auth github:tbrowder # if entered, overrides env var PERL6_META6_AUTH 

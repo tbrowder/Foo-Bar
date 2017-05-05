@@ -143,25 +143,38 @@ sub handle-section($section, @words is copy, META6 $m) {
                 $word = 'Artistic-2.0'; # default
             }
             $m{$section}  = $word;
-            %ms{$section} = $word;
+            %os{$section} = $word;
         }
         when 'gitrepo' {
             # mandatory
             die "FATAL: Too many words ($nw) for section '$section'." if $nw > 1;
             die "FATAL: Too few words ($nw) for section '$section'." if $nw < 1;
+            my $word = shift @words;
+            #$m{$section}  = $word; # need to handle another way
+            %us{$section} = $word;
         }
         when 'gitauthor' {
             # mandatory
             die "FATAL: Too many words ($nw) for section '$section'." if $nw > 1;
             die "FATAL: Too few words ($nw) for section '$section'." if $nw < 1;
+            my $word = shift @words;
+            #$m{$section}  = $word; # need to handle another way
+            %us{$section} = $word;
         }
         when 'authors' {
-            # mandatory
             my $word = join ' ', @words;
-            $m{$section}  = $word;
-            %ms{$section}.append: $word;
+            $m{$section}.append: $word;
+            %os{$section} = $word;
         }
         when 'provides' {
+            if $nw != 2 {
+                say "WARNING:  Need two words, not $nw, for section '$section'.";
+                next;
+            }
+            my $obj = shift @words;
+            my $src = shift @words;
+            $m{$section}{$obj} = $src;
+            %os{$section} = $obj;
         }
         when 'test-depends' {
             my $word;
@@ -181,6 +194,7 @@ sub handle-section($section, @words is copy, META6 $m) {
         when 'tags' {
         }
         when 'auth' {
+            # if no value, check env var PERL6_META6_AUTH
         }
 
 
