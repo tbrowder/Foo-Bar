@@ -162,6 +162,11 @@ sub handle-section($section, @words is copy, META6 $m) {
             %us{$section} = $word;
         }
         when 'authors' {
+            # need to ensure no dups
+            # the first time this appears, zero out the list
+            if not %os{$section} {
+                $m{$section} = [];
+            }
             my $word = join ' ', @words;
             $m{$section}.append: $word;
             %os{$section} = $word;
@@ -177,6 +182,15 @@ sub handle-section($section, @words is copy, META6 $m) {
             %os{$section} = $obj;
         }
         when 'test-depends' {
+            if $nw != 1 {
+                say "WARNING:  Need one word, not $nw, for section '$section'.";
+                next;
+            }
+            # need to ensure no dups
+            # the first time this appears, zero out the list
+            if not %os{$section} {
+                $m{$section} = [];
+            }
             my $word;
             if $nw {
                 $word = shift @words;
@@ -184,19 +198,120 @@ sub handle-section($section, @words is copy, META6 $m) {
             else {
                 $word = 'Test::Meta'; # default
             }
-            $m{$section}  = $word;
-            %ms{$section}.append: $word;
+            $m{$section}.append: $word;
+            %ms{$section} = $word;
         }
         when 'build-depends' {
+            if $nw != 1 {
+                say "WARNING:  Need one word, not $nw, for section '$section'.";
+                next;
+            }
+            # need to ensure no dups
+            # the first time this appears, zero out the list
+            if not %os{$section} {
+                $m{$section} = [];
+            }
+            my $word;
+            if $nw {
+                $word = shift @words;
+            }
+            else {
+                $word = 'Test::Meta'; # default
+            }
+            $m{$section}.append: $word;
+            %ms{$section} = $word;
+        }
+        when 'build-depends' {
+            if $nw != 1 {
+                say "WARNING:  Need one word, not $nw, for section '$section'.";
+                next;
+            }
+            # need to ensure no dups
+            # the first time this appears, zero out the list
+            if not %os{$section} {
+                $m{$section} = [];
+            }
+            my $word;
+            if $nw {
+                $word = shift @words;
+            }
+            else {
+                $word = 'Test::Meta'; # default
+            }
+            $m{$section}.append: $word;
+            %ms{$section} = $word;
         }
         when 'depends' {
+            if $nw != 1 {
+                say "WARNING:  Need one word, not $nw, for section '$section'.";
+                next;
+            }
+            # need to ensure no dups
+            # the first time this appears, zero out the list
+            if not %os{$section} {
+                $m{$section} = [];
+            }
+            $m{$section}.append: $word;
+            %ms{$section} = $word;
         }
         when 'tags' {
+            if !$nw {
+                say "WARNING:  Need one or more words, not $nw, for section '$section'.";
+                next;
+            }
+            # need to ensure no dups
+            # the first time this appears, zero out the list
+            if not %os{$section} {
+                $m{$section} = [];
+            }
+            $m{$section}.append: $word;
+            %ms{$section} = $word;
+        }
+        when 'depends' {
+            # need to ensure no dups
+            # the first time this appears, zero out the list
+            if not %os{$section} {
+                $m{$section} = [];
+            }
+            $m{$section}.append: $word;
+            %ms{$section} = $word;
+        }
+        when 'tags' {
+            # need to ensure no dups
+            # the first time this appears, zero out the list
+            if not %os{$section} {
+                $m{$section} = [];
+            }
+            $m{$section}.append: $word;
+            # need to ensure no dups
+            # the first time this appears, zero out the list
+            if not %os{$section} {
+                $m{$section} = [];
+            }
+            $m{$section}.append: $word;
+            %ms{$section} = $word;
+        }
+        when 'depends' {
+            # need to ensure no dups
+            # the first time this appears, zero out the list
+            if not %os{$section} {
+                $m{$section} = [];
+            }
+            $m{$section}.append: $word;
+            %ms{$section} = $word;
+        }
+        when 'tags' {
+            # need to ensure no dups
+            # the first time this appears, zero out the list
+            if not %os{$section} {
+                $m{$section} = [];
+            }
+            $m{$section}.append: $word;
+            %ms{$section} = $word;
         }
         when 'auth' {
             # if no value, check env var PERL6_META6_AUTH
         }
-
 
         default { die "FATAL: Unhandled section '$section' in file '$mfil'."; }
     }

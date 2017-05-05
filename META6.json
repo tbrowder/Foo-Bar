@@ -19,14 +19,11 @@
     
   ],
   "license": "Artistic-2.0",
-  "test-depends": "Test::Meta",
   "provides": {
     "Foo::Bar": "lib/Foo/Bar.pm6"
   },
   "version": "0.0.0",
   "authors": [
-    "Tom Browder <tom.browder@gmail.com>",
-    "Tom Browder <tom.browder@gmail.com>",
     "Tom Browder <tom.browder@gmail.com>"
   ],
   "description": "Miscellanous stuff for practicing module development",
