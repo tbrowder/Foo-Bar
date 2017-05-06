@@ -46,6 +46,7 @@ our %os is export = [
 our %sl is export = set <
            depends 
            build-depends 
+           test-depends 
            tags
            resources
 >;

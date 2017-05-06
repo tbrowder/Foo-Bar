@@ -10,30 +10,26 @@ version # initial version, default: '0.0.0', ignored over higher versions in the
 perl # default 6
 
 #=== my mandatory sections =============
-gitrepo Foo-Bar-Perl6 # github repo name (without .git extension), mandatory 
-gitauthor tbrowder    # if entered, overrides env var GITHUB_USER 
+gitrepo Foo-Bar-Perl6 # github repo name (without .git extension), mandatory
+gitauthor tbrowder    # if entered, overrides env var GITHUB_USER
 
 #=== S22 optional sections =============
 # The provides tag may be entered multiple times.
-# Each entry is followed by two entries: module or bin name, and the local path 
+# Each entry is followed by two entries: module or bin name, and the local path
 # to the object.
 provides Foo::Bar lib/Foo/Bar.pm6
 
 # single-value sections
-auth github:tbrowder # if entered, overrides env var PERL6_META6_AUTH 
+auth github:tbrowder # if entered, overrides env var PERL6_META6_AUTH
 license # default Artistic-2.0
 
 #=== LISTS ====
 # list sections (multi-valued)
-depends 
-test-depends # default:  Test::META
+# The authors tag may be entered multiple times.
+authors Tom Browder <tom.browder@gmail.com>
+depends
 build-depends
 tags # not mandatory yet, but desired by the ecosystem
-
-# The authors tag may be entered multiple times.
-authors Tom Browder <tom.browder@gmail.com> 
+test-depends # default:  Test::META
 
 #=== HASHES ====
-
-
- 

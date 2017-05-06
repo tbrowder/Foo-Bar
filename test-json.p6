@@ -1,4 +1,4 @@
-#!/usr/bin/env perl6 
+#!/usr/bin/env perl6
 use META6;
 
 use Proc::More :run-command;
@@ -84,16 +84,17 @@ sub check-mandatory-sections {
 sub handle-section($section, @words is copy, META6 $m) {
     my $nw = +@words;
 
-=begin pod
+    =begin pod
     if !$nw {
         say "WARNING: Section '$sect' is unknown." if !isa-meta-section($sect);
         say "WARNING: Section '$sect' has no value.";
         next if not %ms{$sect}:exists and not %ms{$sect}:exists;
     }
-=end pod
+    =end pod
 
     given $section {
-        when so %sl{$section}:exists { say "section $section is a list"}
+
+	# mandatory sections
         when 'name' {
             # S22 mandatory
             die "FATAL: Too many words ($nw) for section '$section'." if $nw > 1;
@@ -134,6 +135,8 @@ sub handle-section($section, @words is copy, META6 $m) {
             $m{$section}  = $word;
             %ms{$section} = $word;
         }
+
+	# non-mandatory
         when 'license' {
             die "FATAL: Too many words ($nw) for section '$section'." if $nw > 1;
             my $word;
@@ -182,100 +185,33 @@ sub handle-section($section, @words is copy, META6 $m) {
             $m{$section}{$obj} = $src;
             %os{$section} = $obj;
         }
-        when 'test-depends' {
-die "fix test-depends";
-            if !$nw {
-                say "WARNING:  Need one or more words for section '$section'.";
-                next;
-            }
-            # need to ensure no dups
-            # the first time this appears, zero out the list
-            if not %os{$section} {
-                $m{$section} = [];
-            }
-            my $word;
-            if $nw {
-                $m{$section}.append($_) for @words;
-            }
-            else {
-                my $word = 'Test::Meta'; # default
-                $m{$section}.append: $word;
-            }
-            %os{$section} = 1;
-        }
-        when 'build-depends' {
-            if !$nw {
-                say "WARNING:  Need one or more words for section '$section'.";
-                next;
-            }
-            # need to ensure no dups
-            # the first time this appears, zero out the list
-            if not %os{$section} {
-                $m{$section} = [];
-            }
-            $m{$section}.append($_) for @words;
-            %os{$section} = 1;
-        }
-        when 'depends' {
-            if !$nw {
-                say "WARNING:  Need one or more words for section '$section'.";
-                next;
-            }
-            # need to ensure no dups
-            # the first time this appears, zero out the list
-            if not %os{$section} {
-                $m{$section} = [];
-            }
-            $m{$section}.append($_) for @words;
-            %os{$section} = 1;
-        }
-        when 'tags' {
-            if !$nw {
-                say "WARNING:  Need one or more words for section '$section'.";
-                next;
-            }
-            # need to ensure no dups
-            # the first time this appears, zero out the list
-            if not %os{$section} {
-                $m{$section} = [];
-            }
-            $m{$section}.append($_) for @words;
-            %ms{$section} = 1;
-        }
-        when 'tags' {
-            if !$nw {
-                say "WARNING:  Need one or more words for section '$section'.";
-                next;
-            }
-            # need to ensure no dups
-            # the first time this appears, zero out the list
-            if not %os{$section} {
-                $m{$section} = [];
-            }
-            $m{$section}.append: $word;
-            %ms{$section} = $word;
-        }
-        when 'depends' {
-            # need to ensure no dups
-            # the first time this appears, zero out the list
-            if not %os{$section} {
-                $m{$section} = [];
-            }
-            $m{$section}.append: $word;
-            %ms{$section} = $word;
-        }
-        when 'tags' {
-            # need to ensure no dups
-            # the first time this appears, zero out the list
-            if not %os{$section} {
-                $m{$section} = [];
-            }
-            $m{$section}.append: $word;
-            %ms{$section} = $word;
-        }
         when 'auth' {
             # if no value, check env var PERL6_META6_AUTH
         }
+
+	when %sl{$section}:exists { 
+            #say "section $section is a list";
+            # need to ensure no dups
+            # the first time this appears, zero out the list
+            if not %os{$section} {
+                $m{$section} = [];
+            }
+
+            if !$nw {
+                if $section eq 'test-depends' {
+                    my $word = 'Test::Meta'; # default
+                    $m{$section}.append: $word;
+                    %os{$section} = 1;
+                }
+                else {
+                    say "WARNING:  Need one or more words for section '$section'.";
+                }
+                next;
+            }
+            $m{$section}.append($_) for @words;
+            %os{$section} = 1;
+        }
+
 
         default { die "FATAL: Unhandled section '$section' in file '$mfil'."; }
     }
@@ -292,4 +228,3 @@ sub init-sections(META6 $m) {
         $m<tags> = [];
     }
 }
-
