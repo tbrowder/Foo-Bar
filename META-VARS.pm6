@@ -42,6 +42,14 @@ our %os is export = [
            production => '', 
          ];
 
+# sections that are lists
+our %sl is export = set <
+           depends 
+           build-depends 
+           tags
+           resources
+>;
+
 sub isa-meta-section($sect --> Bool) is export {
     if %os{$sect}:exists or %ms{$sect}:exists or %ss{$sect}:exists or %us{$sect}:exists {
         return True;

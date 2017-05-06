@@ -93,6 +93,7 @@ sub handle-section($section, @words is copy, META6 $m) {
 =end pod
 
     given $section {
+        when so %sl{$section}:exists { say "section $section is a list"}
         when 'name' {
             # S22 mandatory
             die "FATAL: Too many words ($nw) for section '$section'." if $nw > 1;
@@ -240,19 +241,6 @@ die "fix test-depends";
             }
             $m{$section}.append($_) for @words;
             %ms{$section} = 1;
-        }
-        when 'depends' {
-            if !$nw {
-                say "WARNING:  Need one or more words for section '$section'.";
-                next;
-            }
-            # need to ensure no dups
-            # the first time this appears, zero out the list
-            if not %os{$section} {
-                $m{$section} = [];
-            }
-            $m{$section}.append: $word;
-            $m{$section}.append($_) for @words;
         }
         when 'tags' {
             if !$nw {
