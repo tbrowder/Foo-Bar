@@ -188,6 +188,10 @@ sub handle-section($section, @words is copy, META6 $m) {
         when 'auth' {
             # if no value, check env var PERL6_META6_AUTH
         }
+        when 'supersedes' {
+        }
+        when 'superseded-by' {
+        }
 
 	when %sl{$section}:exists { 
             #say "section $section is a list";
