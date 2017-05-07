@@ -31,7 +31,7 @@ superseded-by  # name of module this module is superseded by (see Linux::Proc::T
 authors Tom Browder <tom.browder@gmail.com>
 depends
 build-depends
-tags # not mandatory yet, but desired by the ecosystem
+tags ecosystem META6 module # not mandatory yet, but desired by the ecosystem
 test-depends # default:  Test::META
 
 #=== HASHES ====

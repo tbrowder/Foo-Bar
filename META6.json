@@ -11,12 +11,14 @@
   "build-depends": [
     
   ],
-  "auth": null,
+  "auth": "github:tbrowder",
   "depends": [
     
   ],
   "tags": [
-    
+    "ecosystem",
+    "META6",
+    "module"
   ],
   "license": "Artistic-2.0",
   "test-depends": [

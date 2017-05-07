@@ -175,6 +175,7 @@ sub handle-section($section, @words is copy, META6 $m) {
             $m{$section}.append: $word;
             %os{$section} = $word;
         }
+
         when 'provides' {
             if $nw != 2 {
                 say "WARNING:  Need two words, not $nw, for section '$section'.";
@@ -185,8 +186,27 @@ sub handle-section($section, @words is copy, META6 $m) {
             $m{$section}{$obj} = $src;
             %os{$section} = $obj;
         }
+
         when 'auth' {
             # if no value, check env var PERL6_META6_AUTH
+            if !$nw {
+                if %*ENV<PERL6_META6_AUTH>:exists {
+                    my $word = %*ENV<PERL6_META6_AUTH>;
+                    $m{$section} = $word;
+                    %os{$section} = 1;
+                }
+                else {
+                    say "WARNING:  Need one word for section '$section'.";
+                }
+            }
+            elsif $nw != 1 {
+                say "WARNING:  Need one word, not $nw, for section '$section'.";
+            }
+            else {
+                my $word = shift @words;
+                $m{$section} = $word;
+                %os{$section} = 1;
+            }
         }
         when 'supersedes' {
         }
@@ -212,6 +232,7 @@ sub handle-section($section, @words is copy, META6 $m) {
                 }
                 next;
             }
+
             $m{$section}.append($_) for @words;
             %os{$section} = 1;
         }
