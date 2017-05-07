@@ -1,0 +1,27 @@
+The Perl 6 Ecosystem: An Author's View
+from a Github User's Perspective
+
+This is from the viewpoint of a Perl 6 module author who
+wants to ease the drudgery of maintaining the proper
+entries of his modules in the current ecosystem.
+
+Currently the ecosystem consists of a list of references
+to a modules META6.json file (or to its META.info file,
+not a recommended practice).
+
+First realize the desired goal is to enter only versioned
+releases into the ecosystem. Many of the current modules
+in the ecosystem are the master branch so a user may
+not be able to recreate a desired state of a module because
+that state may change without notice. 
+
+Here are two entries found in the ??? file at ????. The first
+points to the master branch of the module, so each time
+the module is installed, the state can be different:
+
+The second entry points to a commit hash so its state will
+be the same for future reinstallations. 
+
+Several pieces of information are required to enter a release
+module, all found in the META6.json file.
+
