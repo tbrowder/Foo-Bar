@@ -22,6 +22,8 @@ provides Foo::Bar lib/Foo/Bar.pm6
 # single-value sections
 auth github:tbrowder # if entered, overrides env var PERL6_META6_AUTH
 license # default Artistic-2.0
+supersedes     # name of module this module supersedes (see Proc::More which supercedes Linux::Proc::Time)
+superseded-by  # name of module this module is superseded by (see Linux::Proc::Time which is superceded by Proc::More)
 
 #=== LISTS ====
 # list sections (multi-valued)
