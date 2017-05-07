@@ -20,10 +20,21 @@ my $mfil = './.meta.in';
 my $m = META6.new :file($jfil);
 
 # if in mode init, read the .meta.in file
+# and save pertinent values in the META6.json file
 my $mode = 'init';
+# if in mode prep=V, read the .meta.in file,
+# save pertinent values in the META6.json file,
+# and save the new version number in the
+#!appropriate variables
+
+my $mode = 'init';
+#$mode = 'prep';
+#my $Version = '1.0.0';
+
 if $mode eq 'init' {
     #init-sections $m;
     read-meta-in $m;
+    set-version-info $m;
     spurt $jfil, $m.to-json;
 }
 
@@ -45,6 +56,13 @@ spurt $jfil, $m.to-json;
 =end pod
 
 #### SUBROUTINES ####
+sub set-version-info(META6 $m) {
+    # use the current or default version to set:
+    #   source-url
+    #   support { source : source }
+    #
+}
+
 sub read-meta-in(META6 $m) {
     # read the default data for a repo
     # must be in a repo dir
