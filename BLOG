@@ -15,13 +15,37 @@ in the ecosystem are the master branch so a user may
 not be able to recreate a desired state of a module because
 that state may change without notice. 
 
-Here are two entries found in the ??? file at ????. The first
+Here are two entries found in the META.list file at 
+https://github.com/perl6/ecosystem. The first
 points to the master branch of the module, so each time
 the module is installed, the state can be different:
 
+  https://raw.githubusercontent.com/colomon/ABC/master/META6.json
+
 The second entry points to a commit hash so its state will
-be the same for future reinstallations. 
+be the same for future installations. 
 
-Several pieces of information are required to enter a release
-module, all found in the META6.json file.
+  https://raw.githubusercontent.com/araraloren/Getopt-Kinoko/ce039ba1ea5c238df55468692426a823645f4a61/META6.json
 
+Several pieces of information for a release
+module may be enteredkkkk, all found in the META6.json file.
+
+Here is an example of a minimum META6.json file for a module
+entered into the ecosystem:
+
+{
+  "perl": "6",
+  "name": "Foo::Bar",
+  "version": "1.0.0",
+  "description": "Miscellaneous stuff for practicing module development",
+
+  "source-url": "https://github.com/tbrowder/Foo-Bar-Perl6/archive/1.0.0.zip",
+  "auth": "github:tbrowder",
+  "license": "Artistic-2.0",
+  "provides": {
+    "Foo::Bar": "lib/Foo/Bar.pm6"
+  },
+}
+
+Note it is a release as indicated by the source-url entry pointing to
+a zip archive with the release version tag as its base name.
