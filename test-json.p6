@@ -22,14 +22,24 @@ my $m = META6.new :file($jfil);
 # if in mode init, read the .meta.in file
 # and save pertinent values in the META6.json file
 my $mode = 'init';
+
 # if in mode prep=V, read the .meta.in file,
 # save pertinent values in the META6.json file,
 # and save the new version number in the
-#!appropriate variables
-
-my $mode = 'init';
+# appropriate variables
 #$mode = 'prep';
 #my $Version = '1.0.0';
+
+if !@*ARGS {
+    say "Usage: $*PROGRAM-NAME go | n.n.n";
+    exit;
+}
+
+my $resp = shift @*ARGS;
+my $version = 0;
+if $resp ~~ /^ \d+ '.' \d+ '.' \d+ $/ {
+    $version = $resp;
+}
 
 if $mode eq 'init' {
     #init-sections $m;
@@ -150,8 +160,14 @@ sub handle-section($section, @words is copy, META6 $m) {
             else {
                 $word = '0.0.0'; # default
             }
+            if $version {
+                # a version was entered on the CLI
+                $word = $version; 
+            }
+
             $m{$section}  = $word;
             %ms{$section} = $word;
+
         }
 
 	# non-mandatory

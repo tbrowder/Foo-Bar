@@ -27,7 +27,7 @@
   "provides": {
     "Foo::Bar": "lib/Foo/Bar.pm6"
   },
-  "version": "0.0.0",
+  "version": "72.0.1",
   "authors": [
     "Tom Browder <tom.browder@gmail.com>"
   ],
