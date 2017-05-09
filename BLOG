@@ -6,7 +6,7 @@ wants to ease the drudgery of maintaining the proper
 entries of his modules in the current ecosystem.
 
 Currently the ecosystem consists of a list of references
-to a modules META6.json file (or to its META.info file,
+to a module's META6.json file (or to its META.info file,
 not a recommended practice).
 
 First realize the desired goal is to enter only versioned
@@ -28,7 +28,7 @@ be the same for future installations.
   https://raw.githubusercontent.com/araraloren/Getopt-Kinoko/ce039ba1ea5c238df55468692426a823645f4a61/META6.json
 
 Several pieces of information for a release
-module may be enteredkkkk, all found in the META6.json file.
+module may be entered, all found in the META6.json file.
 
 Here is an example of a minimum META6.json file for a module
 entered into the ecosystem:
@@ -49,3 +49,8 @@ entered into the ecosystem:
 
 Note it is a release as indicated by the source-url entry pointing to
 a zip archive with the release version tag as its base name.
+Its entry in the ecosystem would look something like this:
+
+  https://raw.githubusercontent.com/tbrowder/Foo-Bar-Perl6/ae039ba1ea5c238df55468b92426a623645f3b37/META6.json
+
+where the release commit hash is shown before the META6.json file.
