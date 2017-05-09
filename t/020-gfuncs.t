@@ -3,7 +3,7 @@ use Test;
 
 use GFUNCS :ALL;
 
-plan 3;
+plan 6;
  
 my $v1 = GFUNCS::Version.new(major => 1, minor => 2, patch => 3);
 my $v2 = GFUNCS::Version.new(major => 0, minor => 2, patch => 3);
@@ -12,6 +12,11 @@ my $v4 = GFUNCS::Version.new(major => 1, minor => 2, patch => 2);
 
 #say $v2 < $v1;
 
-ok $v2 < $v1;
-ok $v3 < $v1;
-ok $v3 < $v4;
+ok va-lt-vb $v2, $v1;
+nok va-lt-vb $v1, $v2;
+
+ok va-lt-vb $v3, $v1;
+nok va-lt-vb $v1, $v3;
+
+ok va-lt-vb $v3, $v4;
+nok va-lt-vb $v4, $v3;
