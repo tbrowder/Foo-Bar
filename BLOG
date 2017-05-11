@@ -99,5 +99,20 @@ in the committed META6.json file, creates the release tag and pushes it to
 the Github repository, thereby creating the release.
 
 4. Enter the new or updated module information into the ecosystem's META.list
-file.
+file. (Either by a direct commit, if you have commit privileges, or with a
+pull request.
 
+The following procedures can be done manually, but, with the aid of the author's
+Github::Release module, they can be done mostly programmatically:
+
++ Prepare for release as in step 1 above.
+
++ Choose a release number:
+
+  $ release-tool S   # show the largest existing release number
+  $ release-tool P=x.y.z # prepare for release x.y.z which is greater then the current greatest release number
+
++ Create the release:
+
+  $ release--tool C # commit 
++ Create the release
