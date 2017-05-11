@@ -4,7 +4,7 @@ use Test;
 use GFUNCS :ALL;
 use MVersion;
 
-plan 11;
+plan 17;
  
 my $v1 = MVersion.new(1, 2, 3);
 my $v2 = MVersion.new(0, 2, 3);
@@ -44,8 +44,8 @@ my @in = [
 "2 3 4",
 ];
  
-for @in -> $s {
-    my @w = $s.words;
+for @in {
+    my @w = $_.words;
     my UInt $a = +@w[0];
     my UInt $b = +@w[1];
     my UInt $c = +@w[2];
