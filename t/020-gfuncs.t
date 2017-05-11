@@ -46,11 +46,11 @@ my @in = [
  
 for @in -> $s {
     my @w = $s.words;
-    my $a = @w[0];
-    my $b = @w[1];
-    my $c = @w[2];
+    my UInt $a = +@w[0];
+    my UInt $b = +@w[1];
+    my UInt $c = +@w[2];
 
-    my $s0 = "$a.$b.$c";
+    my Str $s0 = "$a.$b.$c";
 
     my $m1 = MVersion.new($a, $b, $c);
     my $m2 = MVersion.new($s0);

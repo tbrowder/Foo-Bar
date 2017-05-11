@@ -1,16 +1,20 @@
 The Perl 6 Ecosystem: An Author's View
 from a Github User's Perspective
 
-This is from the viewpoint of a Perl 6 module author who
+This article is written from the viewpoint of a Perl 6 module author who
+uses Github for module maintainence and who
 wants to ease the drudgery of maintaining the proper
 entries of his modules in the current ecosystem.
 
 Currently the ecosystem consists of a list of references
 to a module's META6.json file (or to its META.info file,
-not a recommended practice).
+not a recommended practice). Installers, such as zef, use
+that META6.json file to obtain other information
+about the module necessary for automatic installation requested
+by users of the module. 
 
-First realize the desired goal is to enter only versioned
-releases into the ecosystem. Many of the current modules
+The rest of this article assumes a desired goal is to enter only versioned
+releases into the ecosystem. Most of the current modules
 in the ecosystem are the master branch so a user may
 not be able to recreate a desired state of a module because
 that state may change without notice. 
@@ -54,3 +58,45 @@ Its entry in the ecosystem would look something like this:
   https://raw.githubusercontent.com/tbrowder/Foo-Bar-Perl6/ae039ba1ea5c238df55468b92426a623645f3b37/META6.json
 
 where the release commit hash is shown before the META6.json file.
+
+Several stages for creating a release can be described:
+
+1. The author ensures all is ready for release including current change log
+entries, current and complete documentation is prepared, all tests pass,
+and the working directory is clean.
+
+2. The author chooses a release version number. Recommended practice is
+to use a version number in the format "n.n.n" where each dot-separated each
+n is a positive integer representing, say, a major, minor, or patch
+number of a release, respectively. The chosen release number should be greater
+than all previous releases, where "greater" means each number, from left to right,
+is either equal to or greater than the last release. The rquirement is
+satisfied when the first larger number is found. For example:
+
+  0.1.2 is greater than 0.1.1
+  2.1.2 is greater than 1.9.2
+  3.4.0 is greater than 3.3.9
+
+Note the author's module has a function to ensure the chosen release number
+is indeed is larger than previous releases.
+
+In git terms, a release version number is a tagged commit, so a release tag is just
+a name for a specific commit hash. When a commit is tagged and pushed to Github,
+Github automatically creates several artifacts useful to us and installers:
+
+  a zip archive of the commit
+  a tar/gzip archive of the commit
+  a path to the commit tree
+
+The preferred source-url pointer in the META6.json file is the zip archive.
+Since we know the format of the zip archive pointer, we can, in advance,
+commit it in the META6.json file of that commit because we control the
+commit tag name!
+
+
+ is at least equal
+has a major
+number equal or larger   
+
+
+ 
