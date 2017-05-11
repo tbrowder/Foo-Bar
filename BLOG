@@ -61,8 +61,9 @@ where the release commit hash is shown before the META6.json file.
 
 Several stages for creating a release can be described:
 
-1. The author ensures all is ready for release including current change log
-entries, current and complete documentation is prepared, all tests pass,
+1. The author ensures all is ready for release. Such preparation
+includes ensuring the change log is current,
+current and complete documentation is prepared, all tests pass,
 and the working directory is clean.
 
 2. The author chooses a release version number. Recommended practice is
@@ -93,3 +94,10 @@ Since we know the format of the zip archive pointer, we can, in advance,
 commit it in the META6.json file of that commit because we control the
 commit tag name!
  
+3. Create the release. The author, after checking the release number is correct
+in the committed META6.json file, creates the release tag and pushes it to
+the Github repository, thereby creating the release.
+
+4. Enter the new or updated module information into the ecosystem's META.list
+file.
+
