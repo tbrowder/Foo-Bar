@@ -15,7 +15,7 @@ by users of the module.
 
 The rest of this article assumes a desired goal is to enter only versioned
 releases into the ecosystem. Most of the current modules
-in the ecosystem are the master branch so a user may
+in the ecosystem are on their master branch, so a user may
 not be able to recreate a desired state of a module because
 that state may change without notice. 
 
@@ -66,7 +66,7 @@ entries, current and complete documentation is prepared, all tests pass,
 and the working directory is clean.
 
 2. The author chooses a release version number. Recommended practice is
-to use a version number in the format "n.n.n" where each dot-separated each
+to use a version number in the format "n.n.n" where each dot-separated
 n is a positive integer representing, say, a major, minor, or patch
 number of a release, respectively. The chosen release number should be greater
 than all previous releases, where "greater" means each number, from left to right,
@@ -77,8 +77,8 @@ satisfied when the first larger number is found. For example:
   2.1.2 is greater than 1.9.2
   3.4.0 is greater than 3.3.9
 
-Note the author's module has a function to ensure the chosen release number
-is indeed is larger than previous releases.
+(Note the author's Github::Release module has a function to ensure the chosen release number
+is indeed larger than previous releases.)
 
 In git terms, a release version number is a tagged commit, so a release tag is just
 a name for a specific commit hash. When a commit is tagged and pushed to Github,
@@ -92,11 +92,4 @@ The preferred source-url pointer in the META6.json file is the zip archive.
 Since we know the format of the zip archive pointer, we can, in advance,
 commit it in the META6.json file of that commit because we control the
 commit tag name!
-
-
- is at least equal
-has a major
-number equal or larger   
-
-
  
