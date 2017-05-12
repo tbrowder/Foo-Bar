@@ -2,29 +2,21 @@ use v6;
 use Test;
 
 use GFUNCS :ALL;
-use MVersion;
+use MVERSION;
 
-plan 21;
+plan 15;
  
 my $v1 = MVersion.new(1, 2, 3);
 my $v2 = MVersion.new(0, 2, 3);
 my $v3 = MVersion.new(1, 1, 3);
 my $v4 = MVersion.new(1, 2, 2);
+my $v5 = MVersion.new(1, 2, 2);
 
-ok va-lt-vb $v2, $v1;
-nok va-lt-vb $v1, $v2;
+ok $v1 != $v2;
+ok $v4 == $v5;
 
-ok va-lt-vb $v3, $v1;
-nok va-lt-vb $v1, $v3;
-
-ok va-lt-vb $v3, $v4;
-nok va-lt-vb $v4, $v3;
-
-ok $v3.lt: $v4;
-nok $v4.lt: $v3;
-
-ok $v3 < $v4;
-nok $v4 < $v3;
+nok $v2 > $v1;
+ok $v1 > $v2;
 
 my $s;
 $s = $v1.Str;
