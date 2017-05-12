@@ -4,7 +4,7 @@ use Test;
 use GFUNCS :ALL;
 use MVersion;
 
-plan 19;
+plan 21;
  
 my $v1 = MVersion.new(1, 2, 3);
 my $v2 = MVersion.new(0, 2, 3);
@@ -22,6 +22,9 @@ nok va-lt-vb $v4, $v3;
 
 ok $v3.lt: $v4;
 nok $v4.lt: $v3;
+
+ok $v3 < $v4;
+nok $v4 < $v3;
 
 my $s;
 $s = $v1.Str;
