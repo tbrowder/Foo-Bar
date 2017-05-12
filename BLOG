@@ -100,12 +100,12 @@ the Github repository, thereby creating the release.
 
 4. Enter the new or updated module information into the ecosystem's META.list
 file. (Either by a direct commit, if you have commit privileges, or with a
-pull request.
+pull request.)
 
 The following procedures can be done manually, but, with the aid of the author's
 Github::Release module, they can be done mostly programmatically:
 
-+ Prepare for release as in step 1 above.
++ Prepare for the release as in step 1 above.
 
 + Choose a release number:
 
@@ -114,5 +114,18 @@ Github::Release module, they can be done mostly programmatically:
 
 + Create the release:
 
-  $ release--tool C # commit 
-+ Create the release
+  $ release--tool C # pushes the release tag to Github
+
++ Test the release:
+
+  $ release-tool T # download the release zip archive from Github 
+
+Note there are some extra hidden files used or created by the release-tool script:
+
+  .meta.in   # To be completed as appropriate by the author. it is used by the release-tool
+             # script to check or update the META6.json file.
+
+  .releases  # a list of release numbers and associated commit hashes
+
+  .ecosystem # a list of ecosystem entries for each release
+
