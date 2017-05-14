@@ -1,41 +1,40 @@
 The Perl 6 Ecosystem: An Author's View
 from a Github User's Perspective
 
-This article is written from the viewpoint of a Perl 6 module author who
-uses Github for module maintainence and who
-wants to ease the drudgery of maintaining the proper
-entries of his modules in the current ecosystem.
+This article is written from the viewpoint of a Perl 6 module author
+who uses Github for module maintainence and who wants to ease the
+drudgery of maintaining the proper entries of his modules in the
+current ecosystem.
 
-Currently the ecosystem consists of a list of references
-to a module's META6.json file (or to its META.info file,
-not a recommended practice). Installers, such as zef, use
-that META6.json file to obtain other information
-about the module necessary for automatic installation requested
-by users of the module. 
+Currently, the ecosystem consists of a list of references to a
+module's META6.json file (or to its META.info file, not a recommended
+practice). Installers, such as zef, use that META6.json file to obtain
+other information about the module necessary for automatic
+installation requested by users of the module.
 
-The rest of this article assumes a desired goal is to enter only versioned
-releases into the ecosystem. Most of the current modules
-in the ecosystem are on their master branch, so a user may
-not be able to recreate a desired state of a module because
-that state may change without notice. 
+The rest of this article assumes a desired goal is to enter only
+versioned releases into the ecosystem. Most of the current modules in
+the ecosystem are on their master branch, so a user may not be able to
+recreate a desired state of a module because that state may change
+without notice.
 
-Here are two entries found in the META.list file at 
-https://github.com/perl6/ecosystem. The first
-points to the master branch of the module, so each time
-the module is installed, the state can be different:
+Here are two entries found in the META.list file at
+https://github.com/perl6/ecosystem. The first points to the master
+branch of the module, so each time the module is installed, the state
+can be different:
 
   https://raw.githubusercontent.com/colomon/ABC/master/META6.json
 
-The second entry points to a commit hash so its state will
-be the same for future installations. 
+The second entry points to a commit hash so its state will be the same
+for future installations.
 
   https://raw.githubusercontent.com/araraloren/Getopt-Kinoko/ce039ba1ea5c238df55468692426a823645f4a61/META6.json
 
-Several pieces of information for a release
-module may be entered, all found in the META6.json file.
+Several pieces of information for a release module may be entered, all
+found in the META6.json file.
 
-Here is an example of a minimum META6.json file for a module
-entered into the ecosystem:
+Here is an example of a minimum META6.json file for a module entered
+into the ecosystem:
 
 {
   "perl": "6",
@@ -52,8 +51,8 @@ entered into the ecosystem:
 }
 
 Note it is a release as indicated by the source-url entry pointing to
-a zip archive with the release version tag as its base name.
-Its entry in the ecosystem would look something like this:
+a zip archive with the release version tag as its base name.  Its
+entry in the ecosystem would look something like this:
 
   https://raw.githubusercontent.com/tbrowder/Foo-Bar-Perl6/ae039ba1ea5c238df55468b92426a623645f3b37/META6.json
 
@@ -62,55 +61,59 @@ where the release commit hash is shown before the META6.json file.
 Several stages for creating a release can be described:
 
 1. The author ensures all is ready for release. Such preparation
-includes ensuring the change log is current,
-current and complete documentation is prepared, all tests pass,
-and the working directory is clean.
+includes ensuring the change log is current, current and complete
+documentation is prepared, all tests pass, and the working directory
+is clean.
 
-2. The author chooses a release version number. Recommended practice is
-to use a version number in the format "n.n.n" where each dot-separated
-n is a positive integer representing, say, a major, minor, or patch
-number of a release, respectively. The chosen release number should be greater
-than all previous releases, where "greater" means each number, from left to right,
-is either equal to or greater than the last release. The rquirement is
-satisfied when the first larger number is found. For example:
+2. The author chooses a release version number. Recommended practice
+is to use a version number in the format "n.n.n" where each
+dot-separated n is a positive integer representing, say, a major,
+minor, or patch number of a release, respectively. The chosen release
+number should be greater than all previous releases, where "greater"
+means each number, from left to right, is either equal to or greater
+than the last release. The rquirement is satisfied when the first
+larger number is found. For example:
 
   0.1.2 is greater than 0.1.1
   2.1.2 is greater than 1.9.2
   3.4.0 is greater than 3.3.9
 
-(Note the author's Github::Release module has a function to ensure the chosen release number
-is indeed larger than previous releases.)
+(Note the author's Github::Release module has a function to ensure the
+chosen release number is indeed larger than previous releases.)
 
-In git terms, a release version number is a tagged commit, so a release tag is just
-a name for a specific commit hash. When a commit is tagged and pushed to Github,
-Github automatically creates several artifacts useful to us and installers:
+In git terms, a release version number is a tagged commit, so a
+release tag is just a name for a specific commit hash. When a commit
+is tagged and pushed to Github, Github automatically creates several
+artifacts useful to us and installers:
 
   a zip archive of the commit
   a tar/gzip archive of the commit
   a path to the commit tree
 
-The preferred source-url pointer in the META6.json file is the zip archive.
-Since we know the format of the zip archive pointer, we can, in advance,
-commit it in the META6.json file of that commit because we control the
-commit tag name!
- 
+The preferred source-url pointer in the META6.json file is the zip
+archive.  Since we know the format of the zip archive pointer, we can,
+in advance, commit it in the META6.json file of that commit because we
+control the commit tag name!
+
 3. Create the release. The author, after checking the release number is correct
 in the committed META6.json file, creates the release tag and pushes it to
 the Github repository, thereby creating the release.
 
-4. Enter the new or updated module information into the ecosystem's META.list
-file. (Either by a direct commit, if you have commit privileges, or with a
-pull request.)
+4. Enter the new or updated module information into the ecosystem's
+META.list file. (Either by a direct commit, if you have commit
+privileges, or with a pull request.)
 
-The following procedures can be done manually, but, with the aid of the author's
-Github::Release module, they can be done mostly programmatically:
+The following procedures can be done manually, but, with the aid of
+the author's Github::Release module, they can be done mostly
+programmatically:
 
 + Prepare for the release as in step 1 above.
 
 + Choose a release number:
 
-  $ release-tool S   # show the largest existing release number
-  $ release-tool P=x.y.z # prepare for release x.y.z which is greater then the current greatest release number
+  $ release-tool S       # show the largest existing release number
+  $ release-tool P=x.y.z # prepare for release x.y.z which is greater than
+                         # the current greatest release number
 
 + Create the release:
 
@@ -118,14 +121,15 @@ Github::Release module, they can be done mostly programmatically:
 
 + Test the release:
 
-  $ release-tool T # download the release zip archive from Github 
+  $ release-tool T # download the release zip archive from Github
 
-Note there are some extra hidden files used or created by the release-tool script:
+Note there are some extra hidden files used or created by the
+release-tool script:
 
-  .meta.in   # To be completed as appropriate by the author. it is used by the release-tool
-             # script to check or update the META6.json file.
+  .meta.in   # To be completed as appropriate by the author. it is used
+             # by the release-tool script to check or update the META6.json
+	     # file.
 
   .releases  # a list of release numbers and associated commit hashes
 
   .ecosystem # a list of ecosystem entries for each release
-
