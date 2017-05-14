@@ -95,9 +95,9 @@ archive.  Since we know the format of the zip archive pointer, we can,
 in advance, commit it in the META6.json file of that commit because we
 control the commit tag name!
 
-3. Create the release. The author, after checking the release number is correct
-in the committed META6.json file, creates the release tag and pushes it to
-the Github repository, thereby creating the release.
+3. Create the release. The author, after checking the release number
+is correct in the committed META6.json file, creates the release tag
+and pushes it to the Github repository, thereby creating the release.
 
 4. Enter the new or updated module information into the ecosystem's
 META.list file. (Either by a direct commit, if you have commit
@@ -109,6 +109,9 @@ programmatically:
 
 + Prepare for the release as in step 1 above.
 
+  Ensure the working directory is clean as desired with a final
+  commit.
+
 + Choose a release number:
 
   $ release-tool S       # show the largest existing release number
@@ -117,7 +120,8 @@ programmatically:
 
 + Create the release:
 
-  $ release--tool C # pushes the release tag to Github
+  $ release-tool C # pushes the release tag to Github, also updates files
+                   # .ecosytem and .releases
 
 + Test the release:
 
