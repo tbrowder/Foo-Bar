@@ -1,7 +1,7 @@
 # Foo::Bar [![Build Status](https://travis-ci.org/tbrowder/Foo-Bar-Perl6.svg?branch=master)](https://travis-ci.org/tbrowder/Foo-Bar-Perl6)
 
 A dummy module to use for testing Github Perl 6 modules and their
-interaction with the Perl 6 on [CPAN](https://cpan.org).
+interaction with the Perl 6 part of [CPAN](https://cpan.org).
 
 ## REFERENCES
 
@@ -11,7 +11,7 @@ which will be used with this module during testing.
 
 ## COPYRIGHT
 
-Copyright (c) 2017 Tom Browder <<tom.browder@gmail.com>>
+Copyright (c) 2017 Thomas M. Browder, Jr. <<tom.browder@gmail.com>>
 
 ## LICENSE
 
