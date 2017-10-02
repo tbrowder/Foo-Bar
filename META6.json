@@ -6,7 +6,7 @@
   "depends" : [ ],
   "description" : "Miscellaneous stuff for practicing module development",
   "name" : "Foo::Bar",
-  "perl" : "6",
+  "perl" : "6.*",
   "provides" : {
     "Foo::Bar" : "lib/Foo/Bar.pm6"
   },
