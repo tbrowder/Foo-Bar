@@ -1,5 +1,5 @@
 PERL6     := perl6
-LIBPATH   := ${PERL6LIB},lib
+LIBPATH   := lib
 
 # set below to 1 for no effect, 1 for debugging messages
 DEBUG := PERL6LIB_DEBUG=0
