@@ -1,19 +1,26 @@
 {
-  "authors" : [
-    "Tom Browder <tom.browder@gmail.com>"
-  ],
-  "build-depends" : [ ],
-  "depends" : [ ],
-  "description" : "Miscellaneous stuff for practicing module development",
-  "name" : "Foo::Bar",
-  "perl" : "6.*",
-  "provides" : {
-    "Foo::Bar" : "lib/Foo/Bar.pm6"
-  },
-  "resources" : [ ],
-  "source-url" : "git://github.com/tbrowder/Foo-Bar-Perl6.git",
-  "test-depends" : [
-    "Test::Meta"
-  ],
-  "version" : "72.0.1"
+    "perl" : "6.*",
+    "name" : "Foo::Bar",
+    "version" : "72.0.1",
+    "description" : "Miscellaneous stuff for practicing module development",
+    "authors" : [
+	"Tom Browder <tom.browder@gmail.com>"
+    ],
+    "license"     : "Artistic-2.0",
+    "source-type" : "git",
+    "source-url" : "git://github.com/tbrowder/Foo-Bar-Perl6.git",
+    "support"     : {
+        "bugtracker" : "https://github.com/tbrowder/Foo-Bar-Perl6/issues"
+    },
+    "provides" : {
+	"Foo::Bar" : "lib/Foo/Bar.pm6"
+    },
+    "test-depends" : [
+	"Test::Meta"
+    ],
+    "resources" : [
+    ],
+    "tags" : [
+	"CPAN", "test"
+    ]
 }
