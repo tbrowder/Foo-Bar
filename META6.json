@@ -16,7 +16,7 @@
 	"Foo::Bar" : "lib/Foo/Bar.pm6"
     },
     "test-depends" : [
-	"Test::Meta"
+	"Test::META"
     ],
     "resources" : [
     ],
