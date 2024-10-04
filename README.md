@@ -3,7 +3,7 @@
 NAME
 ====
 
-**Foo::Bar** - blah
+**Foo::Bar** is a dummy module for testing Mi6::Helper development
 
 SYNOPSIS
 ========
@@ -15,7 +15,7 @@ use Foo::Bar;
 DESCRIPTION
 ===========
 
-**Foo::Bar** is ...
+**Foo::Bar** is test module with on file in the /resources directory but no corresponding entry in META6.json file.
 
 AUTHOR
 ======
@@ -25,7 +25,7 @@ Tom Browder <tbrowder@acm.org>
 COPYRIGHT AND LICENSE
 =====================
 
-© 2023 Tom Browder
+© 2024 Tom Browder
 
 This library is free software; you may redistribute it or modify it under the Artistic License 2.0.
 
