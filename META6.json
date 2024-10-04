@@ -4,6 +4,7 @@
     "Tom Browder"
   ],
   "build-depends": [
+    "MacOS::NativeLib"
   ],
   "depends": [
   ],
