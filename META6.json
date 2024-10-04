@@ -7,7 +7,7 @@
   ],
   "depends": [
   ],
-  "description": "blah",
+  "description": "A module for foreign module testing for Mi6::Helper development",
   "license": "Artistic-2.0",
   "name": "Foo::Bar",
   "perl": "6.d",
@@ -16,8 +16,9 @@
   },
   "resources": [
   ],
-  "source-url": "",
+  "source-url": "https://github.com/tbrowder/Foo-Bar.git",
   "tags": [
+    "test module"
   ],
   "test-depends": [
   ],
