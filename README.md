@@ -15,7 +15,7 @@ use Foo::Bar;
 DESCRIPTION
 ===========
 
-**Foo::Bar** is test module with on file in the /resources directory but no corresponding entry in META6.json file.
+**Foo::Bar** is a test module with one file in the /resources directory, but no corresponding entry in the META6.json file.
 
 AUTHOR
 ======
