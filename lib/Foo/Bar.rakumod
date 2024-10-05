@@ -11,6 +11,11 @@ sub show-resources(
 
     # get keys which are paths from /resources
     my @paths = %?RESOURCES.keys;
+    if @paths.head == 0 {
+        say "Sorry, this is not an installed DISTRIBUTION";
+        return;
+    }
+    
     say "Resources that you can 'slurp':";
     say "  $_" for @paths;
 }
@@ -19,6 +24,11 @@ sub download-resources(
     :$debug,
     ) is export {
     my @paths = %?RESOURCES.keys;
+    if @paths.head == 0 {
+        say "Sorry, this is not an installed DISTRIBUTION";
+        return;
+    }
+    
     say "Downloading /resources files:";
     for @paths -> $path {
         # for the spurt
