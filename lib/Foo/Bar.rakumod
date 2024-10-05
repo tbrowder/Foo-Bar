@@ -1,18 +1,52 @@
 unit class Foo::Bar;
 
 
-
-
 #===================
 # installed resource routines (per current docs)
+sub get-meta-hash(:$debug --> Hash) is export {
+   $?DISTRIBUTION.meta 
+}
+
+sub get-resources-hash(:$debug --> Hash) is export {
+    my @list = get-resources-paths;
+    # convert to a hash: key: file.basename => path
+    my %h;
+    for @list -> $path {
+        my $f = $path.IO.basename;
+        %h{$f} = $path;
+    }
+    %h
+}
+
+sub get-content($path, :$nlines = 0) is export {
+    my $exists = resource-exists $path;
+    unless $exists { return 0; }
+
+    my $s = $?DISTRIBUTION.content($path).open.slurp;
+    if $nlines {
+        my @lines = $s.lines;
+        my $nl = @lines.elems;
+        if $nl >= $nlines {
+            $s.lines[0..$nlines-1].join("\n");
+        }
+        else {
+            $s;
+        }
+    }
+    else {
+        $s
+    }
+} # sub get-content($path, :$nlines = 0) is export {
+
 sub show-resources(
     :$debug,
     ) is export {
 
+    # sub get-resources-paths(:$debug --> List) {
     # get keys which are paths from /resources
-    my @paths = %?RESOURCES.keys;
-    if @paths.head == 0 {
-        say "Sorry, this is not an installed DISTRIBUTION";
+    my @paths = get-resources-paths;
+    if not @paths.elems {
+        say "Sorry, no paths found (this MAY not be an installed DISTRIBUTION)";
         return;
     }
     
@@ -23,9 +57,10 @@ sub show-resources(
 sub download-resources(
     :$debug,
     ) is export {
-    my @paths = %?RESOURCES.keys;
-    if @paths.head == 0 {
-        say "Sorry, this is not an installed DISTRIBUTION";
+    my @paths = get-resources-paths;
+    #my @paths = %?RESOURCES.keys;
+    if not @paths.elems {
+        say "Sorry, no paths found (this MAY not be an installed DISTRIBUTION)";
         return;
     }
     
@@ -46,18 +81,36 @@ sub download-resources(
 sub version(
     :$debug,
     ) is export {
-    say $?DISTRIBUTION.meta<ver>;
+    $?DISTRIBUTION.meta<ver>;
 }
 
-our &author = &auth;
+our &author is export = &auth;
 sub auth(
     :$debug,
     ) is export {
-    say $?DISTRIBUTION.meta<auth>;
+    $?DISTRIBUTION.meta<auth>;
 }
 
 sub api(
     :$debug,
     ) is export {
-    say $?DISTRIBUTION.meta<api>;
+    $?DISTRIBUTION.meta<api>;
+}
+
+#===== non-exported routines
+sub get-resources-paths(:$debug --> List) {
+    my @list =
+        $?DISTRIBUTION.meta<resources>.map({"resources/$_"});
+    @list
+}
+
+sub resource-exists($path? --> Bool) {
+    return False if not $path.defined;
+
+    # "eats" both warnings and errors; fix coming to Zef
+    # as of 2023-10-29
+    # current working code courtesy of @ugexe
+    try {
+        so quietly $?DISTRIBUTION.content($path).open(:r).close; # may die
+    } // False;
 }
