@@ -1,6 +1,14 @@
 Revision history for Foo-Bar
 
 {{$NEXT}}
+    - Added handling of /resouces contents
+      for local and installed modules
+      using $*DISTRIBUTION (with an installed module)
+      and %?RESOURCES (a compile-time variable) 
+      with subroutines:
+      + show-resources
+      + download-resources
+      + version
 
 0.0.1  2024-10-04T15:42:13-05:00
     - Initial version
