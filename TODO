@@ -1,0 +1,4 @@
+Add the run-before-build script to add minimum subs to:
+  + sync /resources and META6.json resources' list
+  + subs should be named 'mi6-helper-X'
+

@@ -3,8 +3,10 @@
 use JSON::Fast;
 use File::Find;
 
+my $debug = 0;
+
 my $dir = $*CWD; #.IO.parent;
-say "\$dir: $dir";
+say "\$dir: $dir" if $debug;
 
 
 my $mfil = "$dir/META6.json";
@@ -13,21 +15,24 @@ my %meta = from-json $mfil.IO.slurp;
 
 my @paths = find :dir($rdir), :type<file>; #.IO.lines;
 
-say "\@paths: ({@paths.elems})";
-say "  '$_'" for @paths;
+say "\@paths: ({@paths.elems})" if $debug;
+if $debug {
+    say "  '$_'" for @paths;
+}
+
 
 for @paths.kv -> $i, $v {
     
-    say "path: $v";
+    say "path: $v" if $debug;
 
     my @pieces = $v.Str.split('/');
     my $pn = @pieces.elems;
 
     # path of interest is after first 7 pieces
-    say "path pieces: ($pn)";
+    say "path pieces: ($pn)" if $debug;
     my $paridx;
     for @pieces.kv -> $i, $v {
-        say "  piece $i: $v";
+        say "  piece $i: $v" if $debug;
         if $v eq "resources" {
             $paridx = $i;
         }
@@ -35,14 +40,14 @@ for @paths.kv -> $i, $v {
     $paridx = 0 if not $paridx.defined;
     my $parent = @pieces[0..$paridx].join('/');
     my $path   = @pieces[$paridx+1..*].join('/');
-    say "parent: '$parent'";
-    say "  path:   '$path'";
+    say "parent: '$parent'" if $debug;
+    say "  path:   '$path'" if $debug;
     %meta<resources>.push: $path;
 }
 
-say "\%META";
+say "\%META" if $debug;
 for %meta<resources>.values {
-    say "meta/resources child: $_";
+    say "meta/resources child: $_" if $debug;
 }
 
 #say %meta<resources>.gist;
