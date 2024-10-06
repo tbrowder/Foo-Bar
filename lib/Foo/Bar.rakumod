@@ -1,6 +1,5 @@
 unit class Foo::Bar;
 
-
 #===================
 # installed resource routines (per current docs)
 sub get-meta-hash(:$debug --> Hash) is export {

@@ -6,7 +6,9 @@
   "build-depends": [
   ],
   "depends": [
+    "JSON::Fast",
     "File::Temp",
+    "File::Find",
     "MacOS::NativeLib"
   ],
   "description": "A module for foreign module testing for Mi6::Helper development",

@@ -3,7 +3,7 @@ use Test;
 use Foo::Bar;
 use File::Temp;
 
-my $debug = 1;
+my $debug = 0;
 
 # exercise loading the example in resources
 my %rpaths = get-resources-hash;
