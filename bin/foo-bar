@@ -1,0 +1,5 @@
+#!/usr/bin/env raku
+
+use Foo::Bar;
+
+show-files

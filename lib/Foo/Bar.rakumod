@@ -14,10 +14,10 @@ sub show-files is export {
 
     # for testing, also show contents
     say "contents of file A:";
-    say $?DISTRIBUTION.content(@resources[0]).open.slurp;
+    say $?DISTRIBUTION.content({@resources[0]}).open.slurp;
 
     say "contents of file B:";
-    say $?DISTRIBUTION.content(@resources[1]).open.slurp;
+    say $?DISTRIBUTION.content({@resources[1]}).open.slurp;
 }
 
 sub get-file-content($path) is export {
