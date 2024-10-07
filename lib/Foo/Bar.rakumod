@@ -1,4 +1,4 @@
-unit class Foo::Bar;
+unit module  Foo::Bar;
 
 #===================
 # The following code is added to the main module of one created by
@@ -11,16 +11,19 @@ our @resources is export = <
     resources/subdir/more.txt
     resources/some.txt
 >;
+
 sub show-resources-files is export {
     say "File paths in the /resources directory:";
     for @resources {
         say "  $_";
     }
 }
+
 sub get-resources-file-content($path --> Str) is export {
     $?DISTRIBUTION.content($path).open.slurp;
 }
-sub download-resources-files(IO::Path $DIR?, :$force, :$debug) is export {
+
+sub download-resources-files($DIR?, :$force, :$debug) is export {
 
     my $dir = $DIR.defined ?? $DIR !! $*CWD;
     print qq:to/HERE/;
