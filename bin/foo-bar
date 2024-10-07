@@ -22,8 +22,11 @@ if not @*ARGS {
 }
 
 my $dir   = $*CWD;
-my $force = 0;
+my Bool $force = False;
 for @*ARGS {
+    when /^ :i f/ {
+        $force = True;
+    }
     when /^ :i s/ {
         show-resources-files;
     }
@@ -36,7 +39,7 @@ for @*ARGS {
         download-resources-files $dir, :$force;
     }
     when /^ :i d/ {
-        download-resources-files $dir;
+        download-resources-files $dir, :$force;
     }
     default {
         say "FATAL: Unknown arg '$_'";

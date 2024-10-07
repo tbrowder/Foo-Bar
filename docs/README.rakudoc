@@ -2,15 +2,29 @@
 
 =head1 NAME
 
-B<Foo::Bar> is a dummy module for testing Mi6::Helper development
+B<Foo::Bar> is a dummy module illustrating showing and downloading /resources files
 
 =head1 SYNOPSIS
 
+Show file paths under /resources
+
 =begin code :lang<raku>
-
-use Foo::Bar;
-
+$ foo-bar s
+OUTPUT:
+...
 =end code
+
+Download files into the current directory:
+
+=begin code :lang<raku>
+$ foo-bar d
+OUTPUT:
+Downloading /resources files to directory
+  /usr/local/git-repos/my-public-modules/Foo-Bar:
+    File 'more.txt' exists, skipping...
+    File 'some.txt' exists, skipping...
+=end code
+
 
 =head1 DESCRIPTION
 

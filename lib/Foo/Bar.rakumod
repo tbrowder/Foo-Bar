@@ -12,29 +12,39 @@ our @resources is export = <
     resources/some.txt
 >;
 sub show-resources-files is export {
-    say "Files in the /resources directory:";
-    say "  $_" for @resources;
+    say "File paths in the /resources directory:";
+    for @resources {
+        say "  $_";
+    }
 }
 sub get-resources-file-content($path --> Str) is export {
     $?DISTRIBUTION.content($path).open.slurp;
 }
-sub download-resources-files(IO::Path:D $DIR?, :$force) is export {
-    my $dir = $DIR.defined ?? $DIR !! $*CWD;
+sub download-resources-files(IO::Path:D $dir, Bool :$force!) is export {
     print qq:to/HERE/;
     Downloading /resources files to directory
       $dir:
     HERE
+    say "DEBUG: force? {$force.so}";
     FILE: for @resources {
         my $content = get-resources-file-content $_;
         my $f = $_.IO.basename;
-        if $f.IO.f {
-            if not  $force {
-                say "    File '$f' exists, skipping...";
-                next FILE;
-            }
+        if $force.so {
+            unlink $f if $f.IO.e;
+            $f.IO.spurt: $content; 
+            say "    $f";
+            next FILE;
         }
-        spurt $f, $content; 
-        say "    $f";
+        elsif $f.IO.e {
+            say "    File '$f' exists, skipping...";
+            next FILE;
+        }
+        else {
+            $f.IO.spurt: $content; 
+            say "    $f";
+            next FILE;
+        }
+
     }
 }
 
