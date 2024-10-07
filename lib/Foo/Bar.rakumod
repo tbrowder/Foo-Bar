@@ -20,16 +20,16 @@ sub show-resources-files is export {
 sub get-resources-file-content($path --> Str) is export {
     $?DISTRIBUTION.content($path).open.slurp;
 }
-sub download-resources-files(IO::Path:D $dir, Bool :$force!) is export {
+sub download-resources-files(IO::Path:D $dir, :$force!) is export {
     print qq:to/HERE/;
     Downloading /resources files to directory
       $dir:
     HERE
-    say "DEBUG: force? {$force.so}";
+    say "DEBUG: force = $force";
     FILE: for @resources {
         my $content = get-resources-file-content $_;
         my $f = $_.IO.basename;
-        if $force.so {
+        if $force {
             unlink $f if $f.IO.e;
             $f.IO.spurt: $content; 
             say "    $f";
@@ -44,7 +44,6 @@ sub download-resources-files(IO::Path:D $dir, Bool :$force!) is export {
             say "    $f";
             next FILE;
         }
-
     }
 }
 

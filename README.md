@@ -3,13 +3,28 @@
 NAME
 ====
 
-**Foo::Bar** is a dummy module for testing Mi6::Helper development
+**Foo::Bar** is a dummy module illustrating showing and downloading /resources files
 
 SYNOPSIS
 ========
 
+Show file paths under /resources
+
 ```raku
-use Foo::Bar;
+$ foo-bar s
+OUTPUT:
+...
+```
+
+Download files into the current directory:
+
+```raku
+$ foo-bar d
+OUTPUT:
+Downloading /resources files to directory
+  /usr/local/git-repos/my-public-modules/Foo-Bar:
+    File 'more.txt' exists, skipping...
+    File 'some.txt' exists, skipping...
 ```
 
 DESCRIPTION

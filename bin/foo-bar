@@ -2,6 +2,10 @@
 
 use Foo::Bar;
 
+my $dir      = $*CWD;
+my $force    = 0;
+my $show     = 0;
+my $download = 0;
 if not @*ARGS {
     print qq:to/HERE/;
     Usage: {$*PROGRAM.basename} <mode> [...options]
@@ -21,14 +25,13 @@ if not @*ARGS {
     exit;
 }
 
-my $dir   = $*CWD;
-my Bool $force = False;
 for @*ARGS {
     when /^ :i f/ {
-        $force = True;
+        ++$force;
+        say "DEBUG: \$force = $force";
     }
     when /^ :i s/ {
-        show-resources-files;
+        ++$show;
     }
     when /^ :i d \w* '=' (\S+) $/ {
         my $d = ~$0;
@@ -36,13 +39,20 @@ for @*ARGS {
             die "FATAL: '$d' is not a usable directory";
         }
         $dir = $d;
-        download-resources-files $dir, :$force;
     }
     when /^ :i d/ {
-        download-resources-files $dir, :$force;
+        ++$download;
     }
     default {
         say "FATAL: Unknown arg '$_'";
         exit;
     }
 }
+
+if $show {
+    show-resources-files;
+}
+elsif $download {
+    download-resources-files $dir, :$force;
+}
+
