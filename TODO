@@ -1,8 +1,12 @@
 First make the module show and download its two files when installed
++ it's definitive: the /resiurces MUST be duplicated in the META6.json file
 
 Then do the same with local (hopefully without changing anything)
++ it's definitive: it also works locally
 
-Add the run-before-build script to add minimum subs to:
+Add the run-before-build script to add the minimum subs to:
+  + note bin/script should be named per module name but
+    lower case: Foo::Bar => foo-bar
   + sync /resources and META6.json resources' list
-  + subs should be named 'mi6-helper-X'
-
+  + added subs should be named something like 'mi6-helper-X'
+    or 'helper-X'
