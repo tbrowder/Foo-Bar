@@ -1,3 +1,7 @@
+First make the module show and download its two files when installed
+
+Then do the same with local (hopefully without changing anything)
+
 Add the run-before-build script to add minimum subs to:
   + sync /resources and META6.json resources' list
   + subs should be named 'mi6-helper-X'
