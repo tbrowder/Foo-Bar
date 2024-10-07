@@ -19,6 +19,8 @@
     "Foo::Bar": "lib/Foo/Bar.rakumod"
   },
   "resources": [
+    "some.txt",
+    "subdir/more.txt"
   ],
   "source-url": "https://github.com/tbrowder/Foo-Bar.git",
   "tags": [
