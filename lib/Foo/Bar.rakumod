@@ -20,12 +20,14 @@ sub show-resources-files is export {
 sub get-resources-file-content($path --> Str) is export {
     $?DISTRIBUTION.content($path).open.slurp;
 }
-sub download-resources-files(IO::Path:D $dir, :$force!) is export {
+sub download-resources-files(IO::Path $DIR?, :$force, :$debug) is export {
+
+    my $dir = $DIR.defined ?? $DIR !! $*CWD;
     print qq:to/HERE/;
     Downloading /resources files to directory
       $dir:
     HERE
-    say "DEBUG: force = $force";
+    say "DEBUG: force = $force" if $debug;
     FILE: for @resources {
         my $content = get-resources-file-content $_;
         my $f = $_.IO.basename;

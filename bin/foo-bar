@@ -2,7 +2,8 @@
 
 use Foo::Bar;
 
-my $dir      = $*CWD;
+#my $dir      = $*CWD;
+my $dir;
 my $force    = 0;
 my $show     = 0;
 my $download = 0;
@@ -28,7 +29,6 @@ if not @*ARGS {
 for @*ARGS {
     when /^ :i f/ {
         ++$force;
-        say "DEBUG: \$force = $force";
     }
     when /^ :i s/ {
         ++$show;

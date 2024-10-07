@@ -6,12 +6,10 @@ plan 2;
 
 my $s;
 
-$s = get-resources-content(@resources[0]);
+$s = get-resources-file-content(@resources[0]);
 $s .= chomp;
 is $s, "more text";
 
-$s = get-resources-content(@resources[1]);
+$s = get-resources-file-content(@resources[1]);
 $s .= chomp;
 is $s, "some text";
-
-
